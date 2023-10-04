@@ -46,12 +46,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.waterme.ui.theme.WaterMeTheme
 import com.example.waterme.FIVE_SECONDS
-import com.example.waterme.ONE_DAY
 import com.example.waterme.R
-import com.example.waterme.SEVEN_DAYS
-import com.example.waterme.THIRTY_DAYS
 import com.example.waterme.data.DataSource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.waterme.ONE_MINUTE
+import com.example.waterme.THREE_MINUTES
+import com.example.waterme.TWO_MINUTES
 import java.util.concurrent.TimeUnit
 
 @Composable
@@ -139,9 +139,9 @@ fun ReminderDialogContent(
 ) {
     val reminders = listOf(
         Reminder(R.string.five_seconds, FIVE_SECONDS, TimeUnit.SECONDS, plantName),
-        Reminder(R.string.one_day, ONE_DAY, TimeUnit.DAYS, plantName),
-        Reminder(R.string.one_week, SEVEN_DAYS, TimeUnit.DAYS, plantName),
-        Reminder(R.string.one_month, THIRTY_DAYS, TimeUnit.DAYS, plantName)
+        Reminder(R.string.x_minutes, ONE_MINUTE, TimeUnit.MINUTES, plantName),
+        Reminder(R.string.x_minutes, TWO_MINUTES, TimeUnit.MINUTES, plantName),
+        Reminder(R.string.x_minutes, THREE_MINUTES, TimeUnit.MINUTES, plantName)
     )
 
     AlertDialog(
@@ -152,7 +152,7 @@ fun ReminderDialogContent(
             Column {
                 reminders.forEach {
                     Text(
-                        text = stringResource(it.durationRes),
+                        text = stringResource(it.durationRes, it.duration),
                         modifier = Modifier
                             .clickable {
                                 onScheduleReminder(it)
